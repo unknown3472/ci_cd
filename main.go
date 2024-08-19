@@ -9,6 +9,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.GET("/ping", )
+	r.Run(":8080")
 }
 
 func PingHandler(c *gin.Context){
