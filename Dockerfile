@@ -1,12 +1,23 @@
-From golang;1.22.5-alpine3.18 as builder
+# First stage: build the Go application
+FROM golang:1.22.5-alpine3.18 AS builder
 
-Run mkdir app
+# Set the working directory inside the container
+WORKDIR /app
 
-Copy . /app
+# Copy the source code into the container
+COPY . .
 
-Workdir /app
-Run go build -o main main.go
-From alpine:3.18
-Workdir /app
-Copy --from=builder /app .
+# Build the Go application
+RUN go build -o main main.go
+
+# Second stage: create a smaller image for deployment
+FROM alpine:3.18
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built binary from the builder stage
+COPY --from=builder /app/main .
+
+# Command to run the application
 CMD ["/app/main"]
