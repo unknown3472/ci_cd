@@ -10,6 +10,9 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   DOCKER_IMAGE_NAME: test
   DOCKER_IMAGE_TAG: latest
+  SERVER_USERNAME: ubuntu
+  SERVER_IP: 3.121.86.177
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 jobs:
   build_push_deploy:
@@ -28,3 +31,14 @@ jobs:
         run: |
           docker buildx create --use --name mybuilder
           docker buildx build --platform linux/amd64,linux/arm64 --push -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+      - name: Deploy image to server
+        uses: appleboy/ssh-action@master
+        with: 
+          host: ${{ env.SERVER_IP}}
+          username: ${{ env.SERVER_USERNAME}}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          script: |
+            docker stop test || true
+            docker rm test || true
+            docker image rm ${{ env.DOCKER_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:${{ DOCKER_IMAGE_TAG }} || true
+            docker run -d --name madina -p 8080:8080 ${{ env.DOCKER_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:${{ DOCKER_IMAGE_TAG }}
