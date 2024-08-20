@@ -4,7 +4,6 @@ FROM golang:1.22.5-alpine AS builder
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the source code into the container
 COPY . .
 
 # Build the Go application
