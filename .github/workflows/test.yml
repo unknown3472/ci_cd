@@ -11,7 +11,7 @@ env:
   DOCKER_IMAGE_NAME: test_ci_cd
   DOCKER_IMAGE_TAG: latest
   SERVER_USERNAME: ubuntu
-  SERVER_IP: 3.123.17.5
+  SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 jobs:
