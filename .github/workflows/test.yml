@@ -1,22 +1,18 @@
+---
 name: Build, Push and Deploy Docker Image
-
 on:
   push:
-    branches:
-      - main
--
+    branches: main
 env:
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
 jobs:
   build_push_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
         with:
@@ -26,9 +22,9 @@ jobs:
           script: |
             # Navigate to the lesson_ci_cd directory
             cd ~/cicd/lesson_ci_cd
-            
+
             # Pull the latest changes from the main branch
             git pull origin main
-            
+
             # Build and deploy using Docker Compose
             docker-compose up --build -d
