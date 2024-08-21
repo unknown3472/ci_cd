@@ -4,7 +4,7 @@ on:
     branches: -main
 
 env:
-  SERVER_USERNAME: ubuntu
+  SERVER_USERNAME: -ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
