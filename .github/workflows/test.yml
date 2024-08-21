@@ -42,4 +42,4 @@ jobs:
             mkdir cicd
             cd cicd
             git clone git@github.com:unknown3472/ci_cd.git
-            
+
