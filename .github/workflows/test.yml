@@ -32,6 +32,5 @@ jobs:
             
             # Build and deploy using Docker Compose
             docker-compose up --build -d
-
-          script_stop: true
-          timeout: 200s
+        script_stop: true
+        timeout: 200s
