@@ -2,10 +2,12 @@ name: Build, Push and Deploy Docker Image
 on:
   push:
     branches: -main
+
 env:
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
 jobs:
   build_push_deploy:
     runs-on: ubuntu-latest

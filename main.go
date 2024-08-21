@@ -49,7 +49,7 @@ func create(c *gin.Context){
 		println(err)
 		return
 	}
-	query := "insert into userso(id, name, email) values($1, $2, $3)"
+	query := "insert into usersm(id, name, email) values($1, $2, $3)"
 	_, err = db.Exec(query, req.ID, req.Name, req.Email)
 	if err != nil {
 		return 
