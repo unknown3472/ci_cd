@@ -24,15 +24,17 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
+            set -x  # Print commands before executing them
+
             # Check if cicd directory exists, if not, create it
             mkdir -p $HOME/cicd
             
             # Check if lesson_ci_cd directory exists
             if [ ! -d "$HOME/cicd/lesson_ci_cd/.git" ]; then
-              # Clone the repo if it does not exist
+              echo "Cloning repository..."
               git clone https://github.com/unknown3472/lesson_ci_cd.git $HOME/cicd/lesson_ci_cd
             else
-              # Navigate to the lesson_ci_cd directory and pull the latest changes
+              echo "Updating repository..."
               cd $HOME/cicd/lesson_ci_cd
               git pull origin main
             fi
@@ -41,6 +43,8 @@ jobs:
             cd $HOME/cicd/lesson_ci_cd
             
             # Build and deploy using Docker Compose
+            echo "Building and deploying Docker image..."
             docker-compose up --build -d
+
           script_stop: true
           timeout: 200s
