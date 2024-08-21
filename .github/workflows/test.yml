@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
 env:
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
