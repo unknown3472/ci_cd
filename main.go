@@ -15,12 +15,13 @@ func main() {
 	r.Run(":50051")
 }
 
+
+
 func PingHandler(c *gin.Context){
 	res := Response{Message: "pong"}
 	c.JSON(http.StatusOK, res)
 }
 
-// var db *sql.DB
 
 func initDb()(*sql.DB, error){
 	db, err := sql.Open("postgres", "postgres://postgres:Aa@@2004@postgres-db:5432/postgres?sslmode=disable")
