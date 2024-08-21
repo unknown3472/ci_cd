@@ -26,18 +26,18 @@ jobs:
           script: |
             # Check if cicd directory exists, if not, create it
             mkdir -p ~/cicd
-
-            # Check if lesson_ci_cd directory exists, if not, create it
+            
+            # Check if lesson_ci_cd directory exists, if not, clone the repo
             if [ ! -d "~/cicd/lesson_ci_cd/.git" ]; then
               git clone https://github.com/unknown3472/lesson_ci_cd.git ~/cicd/lesson_ci_cd
             else
               cd ~/cicd/lesson_ci_cd
               git pull origin main
             fi
-
+            
             # Navigate to the lesson_ci_cd directory
             cd ~/cicd/lesson_ci_cd
-
+            
             # Build and deploy using Docker Compose
             docker-compose up --build -d
           script_stop: true
