@@ -25,14 +25,10 @@ jobs:
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
             # Check if cicd directory exists, if not, create it
-            if [ ! -d "~/cicd" ]; then
-              mkdir ~/cicd
-            fi
+            mkdir -p ~/cicd
 
             # Check if lesson_ci_cd directory exists, if not, create it
-            if [ ! -d "~/cicd/lesson_ci_cd" ]; then
-              mkdir ~/cicd/lesson_ci_cd
-            fi
+            mkdir -p ~/cicd/lesson_ci_cd
 
             # Navigate to the lesson_ci_cd directory
             cd ~/cicd/lesson_ci_cd
