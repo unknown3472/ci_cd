@@ -27,9 +27,14 @@ jobs:
             set -x  # Print commands before executing them
 
             # Check if cicd directory exists, if not, create it
-            mkdir -p $HOME/cicd
-            
-            # Check if lesson_ci_cd directory exists
+            if [ ! -d "$HOME/cicd" ]; then
+              echo "Creating cicd directory..."
+              mkdir -p $HOME/cicd
+            else
+              echo "cicd directory already exists."
+            fi
+
+            # Check if lesson_ci_cd directory exists, if not, clone the repo
             if [ ! -d "$HOME/cicd/lesson_ci_cd/.git" ]; then
               echo "Cloning repository..."
               git clone https://github.com/unknown3472/lesson_ci_cd.git $HOME/cicd/lesson_ci_cd
