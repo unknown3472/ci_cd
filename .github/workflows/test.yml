@@ -2,6 +2,8 @@ name: Build, Push and Deploy Docker Image
 on:
   push:
     branches: -main
+  pull:
+    branches: -main
 
 env:
   SERVER_USERNAME: -ubuntu
