@@ -6,10 +6,10 @@ on:
       - main
 
 env:
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKER_IMAGE_NAME: test_ci_cd
-  DOCKER_IMAGE_TAG: latest
+  # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  # DOCKER_IMAGE_NAME: test_ci_cd
+  # DOCKER_IMAGE_TAG: latest
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -21,16 +21,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
 
-      - name: Login to Docker hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      # - name: Login to Docker hub
+      #   run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build and push Docker image
-        run: |
-          docker buildx create --use --name mybuilder
-          docker buildx build --platform linux/amd64,linux/arm64 --push -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+      # - name: Build and push Docker image
+      #   run: |
+      #     docker buildx create --use --name mybuilder
+      #     docker buildx build --platform linux/amd64,linux/arm64 --push -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
 
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
@@ -39,7 +39,7 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            docker stop doston || true
-            docker rm doston || true
-            docker image rm ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }} || true
-            docker run -d --name doston -p 8000:8000 ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}
+            mkdir cicd
+            cd cicd
+            git clone git@github.com:unknown3472/ci_cd.git
+            
