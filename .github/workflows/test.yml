@@ -27,7 +27,7 @@ jobs:
             if [ ! -d "cicd" ]; then
               mkdir -p cicd
             fi
-            cd cicd/ci_cd
+            cd cicd/
             docker compose down
             git clone git@github.com:unknown3472/ci_cd.git
             docker compose up --build -d
