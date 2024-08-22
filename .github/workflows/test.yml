@@ -21,11 +21,8 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            # Navigate to the lesson_ci_cd directory
             cd ~/cicd/lesson_ci_cd
 
-            # Pull the latest changes from the main branch
             git pull origin main
 
-            # Build and deploy using Docker Compose
             docker-compose up --build -d 
