@@ -1,19 +1,22 @@
----
 name: Build, Push and Deploy Docker Image
+
 on:
   push:
-    - branches:
+    branches:
       - main
+
 env:
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
 jobs:
   build_push_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
         with:
