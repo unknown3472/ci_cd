@@ -7,7 +7,8 @@ on:
 
 env:
   SERVER_USERNAME: ubuntu
-  SERVER_IP: 3.121.86.177
+  SERVER_IP: 3.79.185.212
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 jobs:
   build_push_deploy:
@@ -16,21 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Print SSH Key for Debugging
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 5
-
-      - name: Check SSH Key File
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa
-          ssh-keygen -y -f /tmp/id_rsa || echo "Failed to generate public key from private key"
-
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.SERVER_IP }}
           username: ${{ env.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
             if [ ! -d "cicd" ]; then
               mkdir -p cicd
