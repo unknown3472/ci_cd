@@ -15,8 +15,6 @@ func main() {
 	r.Run(":50051")
 }
 
-
-
 func PingHandler(c *gin.Context){
 	res := Response{Message: "pong"}
 	c.JSON(http.StatusOK, res)
