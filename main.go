@@ -2,16 +2,18 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	_"github.com/lib/pq"
+	_ "github.com/lib/pq"
 )
 
 func main() {
 	r := gin.Default()
 	r.GET("/ping", )
 	r.POST("/users", create)
+	fmt.Println("server running on the port 50051")
 	r.Run(":50051")
 }
 
@@ -25,7 +27,7 @@ func initDb()(*sql.DB, error){
 	db, err := sql.Open("postgres", "postgres://postgres:Aa@@2004@postgres-db:5432/postgres?sslmode=disable")
 	return db, err
 }
-
+//struct
 type Response struct{
 	Message string `json:"message"`
 }
