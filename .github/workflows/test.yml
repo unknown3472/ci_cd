@@ -29,7 +29,6 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/
-            git clone git@github.com:unknown3472/ci_cd.git
-            cd ci_cd/
+            cd cicd/
+            git clone origin main
             docker compose up --build
