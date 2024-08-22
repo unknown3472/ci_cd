@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  ACTIONS_STEP_DEBUG: true
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -17,7 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
         with:
@@ -25,6 +24,13 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/cicd/lesson_ci_cd
+            if [ ! -d "cicd" ]; then
+              mkdir -p cicd
+            fi
+            cd cicd/lesson_ci_cd/
+            docker compose down
+            docker image rm lesson_ci_cd-cicd_test_project
             git pull origin main
-            docker-compose up --build -d
+            docker compose up -d
+          script_stop: true
+          timeout: 200s
