@@ -7,7 +7,7 @@ on:
 
 env:
   SERVER_USERNAME: ubuntu
-  SERVER_IP: 3.121.86.177
+  SERVER_IP: 172-26-0-144
 
 jobs:
   build_push_deploy:
