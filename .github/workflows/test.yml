@@ -16,13 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create SSH Key File
+      - name: Print SSH Key for Debugging
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 5
+
+      - name: Check SSH Key File
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
-      - name: Print SSH Key
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 5
-
+          ssh-keygen -y -f /tmp/id_rsa || echo "Failed to generate public key from private key"
 
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
