@@ -41,4 +41,3 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
           ssh-keygen -y -f /tmp/id_rsa
-
