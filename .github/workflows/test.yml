@@ -38,4 +38,3 @@ jobs:
             docker compose up -d
           script_stop: true
           timeout: 200s
-
