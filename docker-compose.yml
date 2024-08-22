@@ -8,6 +8,8 @@ services:
       - db:/data/postgres
     networks:
       - cicd
+    environment:
+      POSTGRES_PASSWORD: your_secure_password
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d postgres"]
       interval: 30s
