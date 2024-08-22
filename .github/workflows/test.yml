@@ -17,11 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Add server to known hosts
-        run: |
-          mkdir -p ~/.ssh/
-          ssh-keyscan ${{ env.SERVER_IP }} >> ~/.ssh/known_hosts
-
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
         with:
