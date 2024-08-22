@@ -20,6 +20,9 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
+      - name: Print SSH Key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 5
+
 
       - name: Deploy image to server
         uses: appleboy/ssh-action@master
