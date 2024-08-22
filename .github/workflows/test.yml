@@ -8,7 +8,6 @@ on:
 env:
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.121.86.177
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 jobs:
   build_push_deploy:
@@ -22,7 +21,7 @@ jobs:
         with:
           host: ${{ env.SERVER_IP }}
           username: ${{ env.SERVER_USERNAME }}
-          key: ${{ env.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             if [ ! -d "cicd" ]; then
               mkdir -p cicd
